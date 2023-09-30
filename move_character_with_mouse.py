@@ -28,14 +28,20 @@ def draw_arrows():
     pass
 
 def move_character():
-    global x, y, click_point
+    global x, y, click_point, dir
 
     if (len(click_point) > 0):
         point_x, point_y = click_point[0]
+        if x < point_x:
+            dir = 1
+        else:
+            dir = -1
     else:
         point_x, point_y = x, y
 
-    t = 0.03
+
+
+    t = 0.05
     x = (1 - t) * x + t * point_x
     y = (1 - t) * y + t * point_y
 
@@ -52,6 +58,7 @@ frame = 0
 hide_cursor()
 click_point = []
 arrow_x, arrow_y = 0, 0
+dir = 1
 
 while running:
     clear_canvas()
@@ -61,7 +68,10 @@ while running:
 
     draw_arrows()
     arrow.draw(arrow_x, arrow_y)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    if dir == 1:
+        character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    else:
+        character.clip_composite_draw(frame * 100, 100 * 1, 100, 100, 0, 'h', x, y, 100, 100)
 
     update_canvas()
 
