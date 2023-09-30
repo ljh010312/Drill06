@@ -16,10 +16,15 @@ def handle_events():
             running = False
         elif event.type == SDL_MOUSEMOTION:
             arrow_x, arrow_y = event.x, TUK_HEIGHT - 1 - event.y
+        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
+            click_point.append((event.x, TUK_HEIGHT - 1 - event.y))
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
 def draw_arrows():
+    global click_point
+    for p in click_point:
+        arrow.draw(p[0], p[1])
     pass
 
 def move_character():
