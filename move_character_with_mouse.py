@@ -40,7 +40,6 @@ def move_character():
         point_x, point_y = x, y
 
 
-
     t = 0.05
     x = (1 - t) * x + t * point_x
     y = (1 - t) * y + t * point_y
