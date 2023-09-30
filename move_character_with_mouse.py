@@ -28,6 +28,22 @@ def draw_arrows():
     pass
 
 def move_character():
+    global x, y, click_point
+
+    if (len(click_point) > 0):
+        point_x, point_y = click_point[0]
+    else:
+        point_x, point_y = x, y
+
+    t = 0.03
+    x = (1 - t) * x + t * point_x
+    y = (1 - t) * y + t * point_y
+
+    dis = math.sqrt((point_x - x) ** 2 + (point_y - y) ** 2)
+    if dis < 5:
+        if (len(click_point) > 0):
+            click_point.pop(0)
+
     pass
 
 running = True
@@ -51,6 +67,7 @@ while running:
 
     frame = (frame + 1) % 8
     handle_events()
+    delay(0.01)
 
 close_canvas()
 
